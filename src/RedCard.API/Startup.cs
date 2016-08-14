@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using RedCard.API.Contexts;
+using Microsoft.EntityFrameworkCore;
 
 namespace RedCard.API
 {
@@ -38,6 +40,7 @@ namespace RedCard.API
             services.AddApplicationInsightsTelemetry(Configuration);
 
             services.AddMvc();
+            services.AddDbContext<ApplicationDbContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline
