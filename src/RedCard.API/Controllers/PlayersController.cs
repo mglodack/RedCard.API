@@ -4,6 +4,7 @@ using RedCard.API.Contexts;
 using RedCard.API.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -40,8 +41,19 @@ namespace RedCard.API.Controllers
         {
             if (player == null) { return BadRequest(); }
 
-            _context.Players.Add(player);
-            await _context.SaveChangesAsync();
+            if (!ModelState.IsValid) { return BadRequest(ModelState); }
+
+            try
+            {
+                _context.Players.Add(player);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException)
+            {
+                ModelState.AddModelError(nameof(player.Name),
+                    $"Player name {player.Name} alread exists.");
+                return BadRequest(ModelState);
+            }
 
             return new ObjectResult(player);
         }
