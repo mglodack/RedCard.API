@@ -7,8 +7,7 @@ namespace RedCard.API.Contexts
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var connection = @"Server=(localdb)\mssqllocaldb;Database=RedCard.Development;Trusted_Connection=True;";
-            optionsBuilder.UseSqlServer(connection);
+            optionsBuilder.UseSqlite("Filename=./redcard.db");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
