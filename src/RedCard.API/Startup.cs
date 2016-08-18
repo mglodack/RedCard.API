@@ -38,7 +38,6 @@ namespace RedCard.API
         {
             // Add framework services.
             services.AddApplicationInsightsTelemetry(Configuration);
-
             services.AddMvc();
             services.AddDbContext<ApplicationDbContext>();
         }
@@ -53,7 +52,12 @@ namespace RedCard.API
 
             app.UseApplicationInsightsExceptionTelemetry();
 
-            app.UseMvc();
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Results}/{action=Index}");
+            });
         }
     }
 }
