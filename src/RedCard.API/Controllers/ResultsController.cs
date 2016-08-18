@@ -13,7 +13,14 @@ namespace RedCard.API.Controllers
     [Route("[controller]")]
     public class ResultsController : Controller
     {
+        [Route("redcards")]
         public IActionResult Index()
+        {
+            return View();
+        }
+
+        [Route("yellowcards")]
+        public IActionResult YellowCards()
         {
             return View();
         }
