@@ -40,7 +40,7 @@
         .attr("class", "graticule")
         .attr("d", path);
 
-    d3.json('Content/data.json', function(error, mockdata) {
+    d3.json('api/stats/redcards', function(error, mockdata) {
         if (error) return console.error(error);
         console.log('mockdata',mockdata);
         mapdata = mockdata;
@@ -66,13 +66,13 @@
         });
     }
     function processWorldD(world, data) {
-            for(var idx=0; idx < data.aggregations.world_map.buckets.length; idx++) {
-                var cCode = data.aggregations.world_map.buckets[idx].key.toUpperCase();
-                var doc_count = data.aggregations.world_map.buckets[idx].doc_count;
+        for (var idx = 0; idx < data.redCardCountForCountry.length; idx++) {
+            var country = data.redCardCountForCountry[idx].country.toUpperCase();
+            var redCardCount = data.redCardCountForCountry[idx].redCardCount;
                 for(var wdx=0; wdx < world.objects.subunits.geometries.length; wdx++) {
-                    var cName = world.objects.subunits.geometries[wdx].id.toUpperCase();
-                    if (cCode === cName) {
-                        world.objects.subunits.geometries[wdx].properties.doc_count = doc_count;
+                    var cName = world.objects.subunits.geometries[wdx].properties.name.toUpperCase();
+                    if (country === cName) {
+                        world.objects.subunits.geometries[wdx].properties.doc_count = redCardCount;
                     }
                 }
             }
@@ -93,7 +93,7 @@
                 .attr('d', path)
                 .on('mouseover',mouseoverLegend).on('mouseout',mouseoutLegend)
                 .on('click', coutryclicked);
-            
+
             countries.append('svg:text')
                 .attr('class', function(d){ return 'subunit-label la'+d.id+d.properties.name.replace(/[ \.#']+/g,''); })
                 //.attr('transform', function(d) { return 'translate('+ path.centroid(d) +')'; })

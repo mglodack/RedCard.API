@@ -1864,7 +1864,7 @@
             }, {
                 "type": "MultiPolygon",
                 "properties": {
-                    "name": "United States of America"
+                    "name": "United States"
                 },
                 "id": "USA",
                 "arcs": [
