@@ -25,7 +25,6 @@ namespace RedCard.API.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Players", x => x.Id);
-                    table.UniqueConstraint("AK_Players_Name", x => x.Name);
                 });
         }
 
