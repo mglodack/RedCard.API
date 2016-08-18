@@ -8,7 +8,7 @@ using RedCard.API.Contexts;
 namespace RedCard.API.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20160816022020_Initial_Create")]
+    [Migration("20160818095600_Initial_Create")]
     partial class Initial_Create
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -41,8 +41,6 @@ namespace RedCard.API.Migrations
                     b.Property<int>("YellowCards");
 
                     b.HasKey("Id");
-
-                    b.HasAlternateKey("Name");
 
                     b.ToTable("Players");
                 });
