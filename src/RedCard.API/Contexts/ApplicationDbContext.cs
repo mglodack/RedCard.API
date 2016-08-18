@@ -26,9 +26,6 @@ namespace RedCard.API.Contexts
 
             playerBuilder.HasKey(player => player.Id);
 
-            // Ensure player name is unique
-            playerBuilder.HasAlternateKey(player => player.Name);
-
             playerBuilder
                 .Property(player => player.Country)
                 .IsRequired();
