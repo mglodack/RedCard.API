@@ -2,7 +2,7 @@
     /* JavaScript goes here. */
     // globals used in graph
     var mapdata = {};
-    var palette = ['#FFE5E5', '#ffcccc', '#FFB2B2', '#ff9999', '#ff7f7f', '#ff6666', '#ff4c4c', '#ff3232', '#ff1919', '#ff0000'];
+    var palette = ['#ffffe5', '#ffffcc', '#ffffb2', '#ffff99', '#ffff7f', '#ffff66', '#ffff4c', '#ffff32', '#ffff19', '#ffff00'];
     var width = 960, height = 960;
     var minDocCount = 0, quantiles = {};
     // projection definitions
@@ -40,7 +40,7 @@
         .attr("class", "graticule")
         .attr("d", path);
 
-    d3.json('/api/stats/redcards', function(error, mockdata) {
+    d3.json('/api/stats/yellowcards', function(error, mockdata) {
         if (error) return console.error(error);
         console.log('mockdata',mockdata);
         mapdata = mockdata;
@@ -66,13 +66,13 @@
         });
     }
     function processWorldD(world, data) {
-        for (var idx = 0; idx < data.redCardCountForCountry.length; idx++) {
-            var country = data.redCardCountForCountry[idx].country.toUpperCase();
-            var redCardCount = data.redCardCountForCountry[idx].redCardCount;
+        for (var idx = 0; idx < data.yellowCardCountForCountry.length; idx++) {
+            var country = data.yellowCardCountForCountry[idx].country.toUpperCase();
+            var yellowCardCount = data.yellowCardCountForCountry[idx].yellowCardCount;
                 for(var wdx=0; wdx < world.objects.subunits.geometries.length; wdx++) {
                     var cName = world.objects.subunits.geometries[wdx].properties.name.toUpperCase();
                     if (country === cName) {
-                        world.objects.subunits.geometries[wdx].properties.doc_count = redCardCount;
+                        world.objects.subunits.geometries[wdx].properties.doc_count = yellowCardCount;
                     }
                 }
             }
